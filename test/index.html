@@ -13,7 +13,8 @@
 <script src="./mock.js"></script>
 <script>
   var wrp = new WRP(article, report, {});
-  wrp.getSlots();
-  wrp.getMarksIndex();
+  var marks = wrp.getSlots();
+  var index = wrp.getMarksIndex();
+  console.log(marks, index);
 </script>
 </html>

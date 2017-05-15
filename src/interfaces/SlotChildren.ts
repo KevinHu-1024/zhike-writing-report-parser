@@ -5,7 +5,6 @@ interface SlotChildren extends Mark {
   endText: string,
   id: string,
   index: number,
-  isPositive: boolean,
   linkWord: string,
   processed: boolean,
   startText: string,
