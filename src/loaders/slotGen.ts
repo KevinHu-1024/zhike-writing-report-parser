@@ -1,5 +1,6 @@
+import SlotChildren from '../interfaces/SlotChildren'
 // 自扩展的mark插槽，children是插槽中包含的marks
-export default function slotGen() {
+export default function slotGen(): SlotChildren[] {
   var marks = Array.from(arguments);
   this._temp.preSlots ? null : this._temp.preSlots = [];
 

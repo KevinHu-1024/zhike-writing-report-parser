@@ -1,7 +1,7 @@
-import Slot from '../interfaces/Slot'
+import SlotChildren from '../interfaces/SlotChildren'
 
 // 处理压缩配置中的mark
-export default function processCompress(): Slot[] {
+export default function processCompress(): SlotChildren[] {
   var marks = Array.from(arguments);
   for(var i = 0; i < marks.length; i ++) {
     var mark = marks[i];

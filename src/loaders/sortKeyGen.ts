@@ -1,4 +1,5 @@
-export default function sortKeyGen() {
+import SlotChildren from '../interfaces/SlotChildren'
+export default function sortKeyGen(): SlotChildren[] {
   var marks = Array.from(arguments);
   var self = this;
   // for(var i = 0; i < marks.length; i ++) {

@@ -1,5 +1,6 @@
+import SlotChildren from '../interfaces/SlotChildren'
 // 将额外的mark（比如压缩后的结果）插入到插槽之间
-export default function insertMarks() {
+export default function insertMarks(): SlotChildren[] {
   var marks = Array.from(arguments);
   var self = this;
 

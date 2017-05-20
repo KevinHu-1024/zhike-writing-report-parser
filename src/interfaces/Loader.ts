@@ -1,7 +1,7 @@
 import SlotChildren from './SlotChildren';
 
 interface Loader {
-  (): SlotChildren
+  (): SlotChildren[]
 }
 
 export default Loader;

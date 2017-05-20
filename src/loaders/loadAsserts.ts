@@ -1,5 +1,6 @@
+import SlotChildren from '../interfaces/SlotChildren'
 // 在mark上面挂载id和index endFix
-export default function preRender() {
+export default function preRender(): SlotChildren[] {
   var marks = Array.from(arguments);
   var self = this;
   marks.map(function(mark, index) {

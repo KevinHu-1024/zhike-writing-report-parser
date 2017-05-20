@@ -1,3 +1,4 @@
+import Loader from "./Loader";
 interface CompressOption {
   enable: boolean,
   needToCompressIdentifier: string[],
@@ -8,7 +9,8 @@ interface LogsOption {
 }
 
 interface LoaderOption {
-
+  enable: boolean,
+  loaders: Loader[] | null
 }
 
 interface Options {
@@ -16,7 +18,8 @@ interface Options {
   idPrefix?: string,
   compress?: CompressOption,
   logs?: LogsOption,
-  loaders?: LoaderOption[],
+  customLoaders?: LoaderOption,
+  presetLoaders?: LoaderOption,
 }
 
 export default Options;

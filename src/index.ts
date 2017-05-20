@@ -9,6 +9,16 @@ import {
   mergeOptions,
 } from './utils';
 
+const presetLoaders: Loader[] = [
+  loaders.processCompress,
+  loaders.slotGen,
+  loaders.processCover,
+  loaders.insertMarks,
+  loaders.loadAsserts,
+  loaders.indexObjGen,
+  loaders.sortKeyGen
+];
+
 const defaultOptions: Options = {
   errorPrefix: 'error',
   idPrefix: new Date().getTime().toString(36),
@@ -19,7 +29,14 @@ const defaultOptions: Options = {
   logs: {
     enable: true,
   },
-  loaders: [],
+  presetLoaders: {
+    enable: true,
+    loaders: presetLoaders,
+  },
+  customLoaders: {
+    enable: false,
+    loaders: null,
+  },
 };
 
 class WRP {
@@ -49,16 +66,12 @@ class WRP {
 
     this._config = mergeOptions(defaultOptions, options);
     // console.log(this._config);
-    // console.log(loaders);
-    this.runLoaders(
-      loaders.processCompress,
-      loaders.slotGen,
-      loaders.processCover,
-      loaders.insertMarks,
-      loaders.loadAsserts,
-      loaders.indexObjGen,
-      loaders.sortKeyGen,
-    );
+    // console.log(loaders)
+    let loaders: Loader[];
+    this._config.presetLoaders.enable && loaders.concat(this._config.presetLoaders.loaders);
+    this._config.customLoaders.enable && loaders.concat(this._config.customLoaders.loaders);
+
+    this.runLoaders(...loaders);
     this.slots = this._data.slots;
     this.marksIndex = this._data.indexObj;
   }
