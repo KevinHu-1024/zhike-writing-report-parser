@@ -67,9 +67,13 @@ class WRP {
     this._config = mergeOptions(defaultOptions, options);
     // console.log(this._config);
     // console.log(loaders)
-    let loaders: Loader[];
-    this._config.presetLoaders.enable && loaders.concat(this._config.presetLoaders.loaders);
-    this._config.customLoaders.enable && loaders.concat(this._config.customLoaders.loaders);
+    let loaders: Loader[] = [];
+    if (this._config.presetLoaders.enable) {
+      loaders = loaders.concat(this._config.presetLoaders.loaders);
+    }
+    if (this._config.customLoaders.enable) {
+      loaders = loaders.concat(this._config.customLoaders.loaders);
+    }
 
     this.runLoaders(...loaders);
     this.slots = this._data.slots;
