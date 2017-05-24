@@ -91,9 +91,8 @@ class WRP {
   private runLoaders(...loaders: Loader[]): void {
     var marks = this.reportJSON.marks;
 
-    var self = this;
-    loaders.forEach(function (loader) {
-      loader.apply(self, marks)
+   loaders.forEach((loader) => {
+      loader.apply(this, marks)
     });
   }
 }
