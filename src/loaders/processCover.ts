@@ -1,7 +1,7 @@
 import SlotChildren from '../interfaces/SlotChildren'
 // 从插槽的children中，按一定规律取出要展示的mark
-export default function processCover(): SlotChildren[] {
-  var marks = Array.from(arguments);
+export default function processCover(...marks: SlotChildren[]): SlotChildren[] {
+  // var marks = Array.from(arguments);
   // console.log(marks);
   var result = [];
   for(var i = 0; i < this._data.slots.length; i ++) {

@@ -1,6 +1,6 @@
 import SlotChildren from '../interfaces/SlotChildren'
-export default function indexObjGen(): SlotChildren[] {
-  var marks = Array.from(arguments);
+export default function indexObjGen(...marks: SlotChildren[]): SlotChildren[] {
+  // var marks = Array.from(arguments);
   this._data.indexObj = {
     data: {},
   };

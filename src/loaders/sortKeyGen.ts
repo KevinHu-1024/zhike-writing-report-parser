@@ -1,6 +1,6 @@
 import SlotChildren from '../interfaces/SlotChildren'
-export default function sortKeyGen(): SlotChildren[] {
-  var marks = Array.from(arguments);
+export default function sortKeyGen(...marks: SlotChildren[]): SlotChildren[] {
+  // var marks = Array.from(arguments);
   var self = this;
   // for(var i = 0; i < marks.length; i ++) {
   var arr = this._data.indexObj.sortKeys = Object.keys(this._data.indexObj.data).sort(function (a, b) {

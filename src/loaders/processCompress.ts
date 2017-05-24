@@ -1,8 +1,8 @@
 import SlotChildren from '../interfaces/SlotChildren'
 
 // 处理压缩配置中的mark
-export default function processCompress(): SlotChildren[] {
-  var marks = Array.from(arguments);
+export default function processCompress(...marks: SlotChildren[]): SlotChildren[] {
+  // var marks = Array.from(arguments);
   for(var i = 0; i < marks.length; i ++) {
     var mark = marks[i];
     if(this._config.compress.needToCompressIdentifier.indexOf(mark.type) != -1) {
