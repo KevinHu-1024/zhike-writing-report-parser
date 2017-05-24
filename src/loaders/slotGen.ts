@@ -1,14 +1,14 @@
 import SlotChildren from '../interfaces/SlotChildren'
+// 接受marks，按一定规律在_data.slots中push SlotChildren
 // 自扩展的mark插槽，children是插槽中包含的marks
-export default function slotGen(): SlotChildren[] {
-  var marks = Array.from(arguments);
-  this._temp.preSlots ? null : this._temp.preSlots = [];
+export default function slotGen(...marks: SlotChildren[]): SlotChildren[] {
+  const preSlots = [];
 
   // 按照一个mark一个slot，return一个预生成的slot数组
   for(var j = 0; j < marks.length; j ++) {
     var aMark = marks[j];
     var preSlot = { start: aMark.start, end: aMark.end, children: [], };
-    this._temp.preSlots.push(preSlot);
+    preSlots.push(preSlot);
   }
 
   // 从这个预生成的slot数组中合并，扩展成slot结果数组
@@ -23,7 +23,7 @@ export default function slotGen(): SlotChildren[] {
     var markNext = marks[i + 1] ? marks[i + 1] : undefined;
 
     // 当前mark是未被处理过的，所以按照索引去preSlots中取出它的slot，作为最终slots中一个slot的基础slot，在它基础上进行自扩展
-    var curSlot = Object.assign({}, this._temp.preSlots[i]);
+    var curSlot = Object.assign({}, preSlots[i]);
 
     // 插入这个slot到最终slots中
     this._data.slots.push(curSlot);
@@ -69,6 +69,5 @@ export default function slotGen(): SlotChildren[] {
     // 防止 i 在所有mark处理完了之后继续循环。因为循环的是marks长度，marks循环完了，i还没循环完
     if(!markNext || mark.start > markNext.start) { console.log('break', mark, markNext);break; }
   }
-  delete this._temp.preSlots;
   return marks;
 }
