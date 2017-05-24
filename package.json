@@ -1,8 +1,8 @@
 {
   "name": "zhike-writing-report-parser",
-  "version": "1.0.1",
-  "description": "",
-  "main": "dist/WRP.js",
+  "version": "1.0.2",
+  "description": "智课写作报告解析工具",
+  "main": "dist/wrp.js",
   "module": "src/index.js",
   "scripts": {
     "dev": "node_modules/webpack/bin/webpack.js --watch",
