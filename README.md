@@ -5,13 +5,13 @@
 ES6
 
 ```javascript
-import WRP from 'wrp';
+import WRP from 'zhike-writing-report-parser';
 ```
 
 UMD
 
 ```html
-<script src="path/to/wrp.js"></script>
+<script src="path/to/zhike-writing-report-parser/dist/wrp.js"></script>
 ```
 
 ## 使用
@@ -21,14 +21,3 @@ var wrp = new WRP(article, reportJson, options);
 wrp.getSlots();
 wrp.getMarksIndex();
 ```
-
-## 选项 `options`
-
-### options.errorPrefix
-### options.idPrefix
-### options.compress
-#### compress.enable
-#### compress.needToCompressIdentifier
-### option.logs
-#### logs.enable
-### options.loaders
