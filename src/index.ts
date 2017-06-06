@@ -48,6 +48,7 @@ class WRP {
 
   private slots: Slot[];
   private marksIndex: MarksIndex;
+  private renderData: any;
   
   constructor(
     article: string,
@@ -75,25 +76,63 @@ class WRP {
       loaders = loaders.concat(this._config.customLoaders.loaders);
     }
 
-    this.runLoaders(...loaders);
+    var result = this.runLoaders(...loaders);
     this.slots = this._data.slots;
     this.marksIndex = this._data.indexObj;
+    this.renderData = this.genRenderData(result);
   }
 
   getSlots() {
     return this.slots;
   }
 
+  getRenderData() {
+    return this.renderData;
+  }
+
+  genRenderData(marks: any) {
+    for (let i = 0; i < marks.length; i++) {
+      const mark = marks[i];
+      const lastMark = i >= 1 ? marks[i - 1] : undefined;
+      const nextMark = marks[i + 1];
+
+      if (mark) {
+        if (lastMark === undefined && nextMark === undefined) {
+          mark.startText = this.article.substring(0, mark.start);
+          mark.endText = this.article.substring(mark.end);
+        } else if (lastMark === undefined) {
+          // 首个mark
+          // console.log('0',mark);
+          mark.startText = this.article.substring(0, mark.start);
+          mark.endText = '';
+        } else if (nextMark === undefined) {
+          // 最后一个mark
+          // console.log('last', mark);
+          mark.startText = this.article.substring(lastMark.end, mark.start);
+          mark.endText = this.article.substring(mark.end);
+        } else {
+          // 中间的普通mark
+          // console.log('middle', mark);
+          mark.startText = this.article.substring(lastMark.end, mark.start);
+          mark.endText = '';
+        }
+      }
+    }
+
+    return marks;
+  }
+
   getMarksIndex() {
     return this.marksIndex;
   }
 
-  private runLoaders(...loaders: Loader[]): void {
+  private runLoaders(...loaders: Loader[]): any {
     var marks = this.reportJSON.marks;
-
-   loaders.forEach((loader) => {
-      loader.apply(this, marks)
+    var result = marks;
+    loaders.forEach((loader) => {
+      result = loader.apply(this, result)
     });
+    return result;
   }
 }
 

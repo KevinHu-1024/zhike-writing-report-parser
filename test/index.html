@@ -15,6 +15,7 @@
   var wrp = new WRP(article, report, {});
   var marks = wrp.getSlots();
   var index = wrp.getMarksIndex();
-  console.log(marks, index);
+  var renderData = wrp.getRenderData();
+  console.log(marks, index, renderData);
 </script>
 </html>

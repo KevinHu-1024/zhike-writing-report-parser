@@ -170,21 +170,53 @@ class WRP {
         if (this._config.customLoaders.enable) {
             loaders = loaders.concat(this._config.customLoaders.loaders);
         }
-        this.runLoaders(...loaders);
+        var result = this.runLoaders(...loaders);
         this.slots = this._data.slots;
         this.marksIndex = this._data.indexObj;
+        this.renderData = this.genRenderData(result);
     }
     getSlots() {
         return this.slots;
+    }
+    getRenderData() {
+        return this.renderData;
+    }
+    genRenderData(marks) {
+        for (let i = 0; i < marks.length; i++) {
+            const mark = marks[i];
+            const lastMark = i >= 1 ? marks[i - 1] : undefined;
+            const nextMark = marks[i + 1];
+            if (mark) {
+                if (lastMark === undefined && nextMark === undefined) {
+                    mark.startText = this.article.substring(0, mark.start);
+                    mark.endText = this.article.substring(mark.end);
+                }
+                else if (lastMark === undefined) {
+                    mark.startText = this.article.substring(0, mark.start);
+                    mark.endText = '';
+                }
+                else if (nextMark === undefined) {
+                    mark.startText = this.article.substring(lastMark.end, mark.start);
+                    mark.endText = this.article.substring(mark.end);
+                }
+                else {
+                    mark.startText = this.article.substring(lastMark.end, mark.start);
+                    mark.endText = '';
+                }
+            }
+        }
+        return marks;
     }
     getMarksIndex() {
         return this.marksIndex;
     }
     runLoaders(...loaders) {
         var marks = this.reportJSON.marks;
+        var result = marks;
         loaders.forEach((loader) => {
-            loader.apply(this, marks);
+            result = loader.apply(this, result);
         });
+        return result;
     }
 }
 module.exports = WRP;
