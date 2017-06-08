@@ -56,7 +56,7 @@ class WRP {
     options: Options
   ) {
     this.article = article;
-    this.reportJSON = reportJSON;
+    this.reportJSON = JSON.parse(JSON.stringify(reportJSON));
     this._temp = {
       lastEndIndex: 0,
       compressMarks: [],
