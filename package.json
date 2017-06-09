@@ -1,6 +1,6 @@
 {
   "name": "zhike-writing-report-parser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "智课写作报告解析工具",
   "main": "dist/wrp.js",
   "module": "src/index.js",
