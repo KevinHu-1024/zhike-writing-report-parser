@@ -83,13 +83,13 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const processCompress_1 = __webpack_require__(6);
-const slotGen_1 = __webpack_require__(8);
-const processCover_1 = __webpack_require__(7);
-const insertMarks_1 = __webpack_require__(4);
-const loadAsserts_1 = __webpack_require__(5);
-const indexObjGen_1 = __webpack_require__(3);
-const sortKeyGen_1 = __webpack_require__(9);
+var processCompress_1 = __webpack_require__(6);
+var slotGen_1 = __webpack_require__(8);
+var processCover_1 = __webpack_require__(7);
+var insertMarks_1 = __webpack_require__(4);
+var loadAsserts_1 = __webpack_require__(5);
+var indexObjGen_1 = __webpack_require__(3);
+var sortKeyGen_1 = __webpack_require__(9);
 exports.default = {
     processCompress: processCompress_1.default,
     slotGen: slotGen_1.default,
@@ -121,9 +121,9 @@ exports.mergeOptions = mergeOptions;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const loaders_1 = __webpack_require__(0);
-const utils_1 = __webpack_require__(1);
-const presetLoaders = [
+var loaders_1 = __webpack_require__(0);
+var utils_1 = __webpack_require__(1);
+var presetLoaders = [
     loaders_1.default.processCompress,
     loaders_1.default.slotGen,
     loaders_1.default.processCover,
@@ -132,7 +132,7 @@ const presetLoaders = [
     loaders_1.default.indexObjGen,
     loaders_1.default.sortKeyGen
 ];
-const defaultOptions = {
+var defaultOptions = {
     errorPrefix: 'error',
     idPrefix: new Date().getTime().toString(36),
     compress: {
@@ -151,8 +151,8 @@ const defaultOptions = {
         loaders: null,
     },
 };
-class WRP {
-    constructor(article, reportJSON, options) {
+var WRP = (function () {
+    function WRP(article, reportJSON, options) {
         this.article = article;
         this.reportJSON = JSON.parse(JSON.stringify(reportJSON));
         this._temp = {
@@ -163,29 +163,29 @@ class WRP {
             slots: [],
         };
         this._config = utils_1.mergeOptions(defaultOptions, options);
-        let loaders = [];
+        var loaders = [];
         if (this._config.presetLoaders.enable) {
             loaders = loaders.concat(this._config.presetLoaders.loaders);
         }
         if (this._config.customLoaders.enable) {
             loaders = loaders.concat(this._config.customLoaders.loaders);
         }
-        var result = this.runLoaders(...loaders);
+        var result = this.runLoaders.apply(this, loaders);
         this.slots = this._data.slots;
         this.marksIndex = this._data.indexObj;
         this.renderData = this.genRenderData(result);
     }
-    getSlots() {
+    WRP.prototype.getSlots = function () {
         return this.slots;
-    }
-    getRenderData() {
+    };
+    WRP.prototype.getRenderData = function () {
         return this.renderData;
-    }
-    genRenderData(marks) {
-        for (let i = 0; i < marks.length; i++) {
-            const mark = marks[i];
-            const lastMark = i >= 1 ? marks[i - 1] : undefined;
-            const nextMark = marks[i + 1];
+    };
+    WRP.prototype.genRenderData = function (marks) {
+        for (var i = 0; i < marks.length; i++) {
+            var mark = marks[i];
+            var lastMark = i >= 1 ? marks[i - 1] : undefined;
+            var nextMark = marks[i + 1];
             if (mark) {
                 if (lastMark === undefined && nextMark === undefined) {
                     mark.startText = this.article.substring(0, mark.start);
@@ -206,19 +206,25 @@ class WRP {
             }
         }
         return marks;
-    }
-    getMarksIndex() {
+    };
+    WRP.prototype.getMarksIndex = function () {
         return this.marksIndex;
-    }
-    runLoaders(...loaders) {
+    };
+    WRP.prototype.runLoaders = function () {
+        var _this = this;
+        var loaders = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            loaders[_i] = arguments[_i];
+        }
         var marks = this.reportJSON.marks;
         var result = marks;
-        loaders.forEach((loader) => {
-            result = loader.apply(this, result);
+        loaders.forEach(function (loader) {
+            result = loader.apply(_this, result);
         });
         return result;
-    }
-}
+    };
+    return WRP;
+}());
 module.exports = WRP;
 
 
@@ -229,7 +235,11 @@ module.exports = WRP;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function indexObjGen(...marks) {
+function indexObjGen() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     this._data.indexObj = {
         data: {},
     };
@@ -264,7 +274,11 @@ exports.default = indexObjGen;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function insertMarks(...marks) {
+function insertMarks() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     var self = this;
     var freeSlots = [];
     for (var m = 0; m <= this._data.slots.length - 1; m++) {
@@ -345,7 +359,11 @@ exports.default = insertMarks;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function preRender(...marks) {
+function preRender() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     var self = this;
     marks.map(function (mark, index) {
         mark.id = self._config.errorPrefix + '_' + self._config.basePrefix + '_' + mark.start;
@@ -365,7 +383,11 @@ exports.default = preRender;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function processCompress(...marks) {
+function processCompress() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     for (var i = 0; i < marks.length; i++) {
         var mark = marks[i];
         if (this._config.compress.needToCompressIdentifier.indexOf(mark.type) != -1) {
@@ -386,7 +408,11 @@ exports.default = processCompress;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function processCover(...marks) {
+function processCover() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     var result = [];
     for (var i = 0; i < this._data.slots.length; i++) {
         var curSlot = this._data.slots[i];
@@ -421,8 +447,12 @@ exports.default = processCover;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function slotGen(...marks) {
-    const preSlots = [];
+function slotGen() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
+    var preSlots = [];
     for (var j = 0; j < marks.length; j++) {
         var aMark = marks[j];
         var preSlot = { start: aMark.start, end: aMark.end, children: [], };
@@ -468,7 +498,11 @@ exports.default = slotGen;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function sortKeyGen(...marks) {
+function sortKeyGen() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
     var self = this;
     var arr = this._data.indexObj.sortKeys = Object.keys(this._data.indexObj.data).sort(function (a, b) {
         return self._data.indexObj.data[b].marks.length - self._data.indexObj.data[a].marks.length;
