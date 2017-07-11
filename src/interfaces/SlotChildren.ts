@@ -8,6 +8,7 @@ interface SlotChildren extends Mark {
   linkWord: string,
   processed: boolean,
   startText: string,
+  sentIndex: number,
 }
 
 export default SlotChildren;

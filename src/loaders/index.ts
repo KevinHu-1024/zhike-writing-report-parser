@@ -5,6 +5,7 @@ import insertMarks from './insertMarks';
 import loadAsserts from './loadAsserts';
 import indexObjGen from './indexObjGen';
 import sortKeyGen from './sortKeyGen';
+import markInSentence from './markInSentence';
 
 export default {
   processCompress,
@@ -14,4 +15,5 @@ export default {
   loadAsserts,
   indexObjGen,
   sortKeyGen,
+  markInSentence,
 }

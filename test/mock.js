@@ -699,6 +699,88 @@ var report = {
                 "change \"activities\" to \"activity\""
             ]
         }
+    ],
+    "reportBySentence": [
+        {
+            "beginPosition": 0,
+            "sentence": "I Like Reading",
+            "comment": ""
+        },
+        {
+            "beginPosition": 17,
+            "sentence": "As students , we read books everyday , but it not do a favorite things .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 87,
+            "sentence": "However , I like reading because book is the best of my friends and reading make me happy .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 180,
+            "sentence": "First of all , I read some stores in my childhood and I found that it is very interesting .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 270,
+            "sentence": "The reading it can broad my hories and make me know many knowledges about the whole world .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 361,
+            "sentence": "Secondly .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 371,
+            "sentence": "I like reading books about history .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 407,
+            "sentence": "Because it can improve my historical knowledges when The exam after .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 476,
+            "sentence": "And it can help me improve my achieventment in this time .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 534,
+            "sentence": "I 'll have a happy emotion .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 561,
+            "sentence": "More important .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 577,
+            "sentence": "Reading about historical book can make me know some China and other countries ` culture .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 664,
+            "sentence": "In a word .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 675,
+            "sentence": "Reading make me have a happy emotion When I feel sad .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 729,
+            "sentence": "I like reading .",
+            "comment": ""
+        },
+        {
+            "beginPosition": 745,
+            "sentence": "Nothing can take the place of books and Reading is my bving activities .",
+            "comment": ""
+        }
     ]
 };
 

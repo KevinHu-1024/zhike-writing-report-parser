@@ -15,8 +15,9 @@ const presetLoaders: Loader[] = [
   loaders.processCover,
   loaders.insertMarks,
   loaders.loadAsserts,
+  loaders.markInSentence,
   loaders.indexObjGen,
-  loaders.sortKeyGen
+  loaders.sortKeyGen,
 ];
 
 const defaultOptions: Options = {
@@ -49,6 +50,7 @@ class WRP {
   private slots: Slot[];
   private marksIndex: MarksIndex;
   private renderData: any;
+  private sentences: any;
   
   constructor(
     article: string,
@@ -78,6 +80,7 @@ class WRP {
 
     var result = this.runLoaders(...loaders);
     this.slots = this._data.slots;
+    this.sentences = this._data.sentences;
     this.marksIndex = this._data.indexObj;
     this.renderData = this.genRenderData(result);
   }
@@ -88,6 +91,10 @@ class WRP {
 
   getRenderData() {
     return this.renderData;
+  }
+
+  getSentences() {
+    return this.sentences;
   }
 
   genRenderData(marks: any) {

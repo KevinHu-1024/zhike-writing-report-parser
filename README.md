@@ -27,4 +27,7 @@ wrp.getMarksIndex();
 
 // 获取经过错误合并、覆盖处理的错误标注数组，可以直接用于渲染文章
 wrp.getRenderData();
+
+// 获取句子
+wrp.getSentences();
 ```

@@ -83,13 +83,14 @@ return /******/ (function(modules) { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var processCompress_1 = __webpack_require__(6);
-var slotGen_1 = __webpack_require__(8);
-var processCover_1 = __webpack_require__(7);
+var processCompress_1 = __webpack_require__(7);
+var slotGen_1 = __webpack_require__(9);
+var processCover_1 = __webpack_require__(8);
 var insertMarks_1 = __webpack_require__(4);
 var loadAsserts_1 = __webpack_require__(5);
 var indexObjGen_1 = __webpack_require__(3);
-var sortKeyGen_1 = __webpack_require__(9);
+var sortKeyGen_1 = __webpack_require__(10);
+var markInSentence_1 = __webpack_require__(6);
 exports.default = {
     processCompress: processCompress_1.default,
     slotGen: slotGen_1.default,
@@ -98,6 +99,7 @@ exports.default = {
     loadAsserts: loadAsserts_1.default,
     indexObjGen: indexObjGen_1.default,
     sortKeyGen: sortKeyGen_1.default,
+    markInSentence: markInSentence_1.default,
 };
 
 
@@ -129,8 +131,9 @@ var presetLoaders = [
     loaders_1.default.processCover,
     loaders_1.default.insertMarks,
     loaders_1.default.loadAsserts,
+    loaders_1.default.markInSentence,
     loaders_1.default.indexObjGen,
-    loaders_1.default.sortKeyGen
+    loaders_1.default.sortKeyGen,
 ];
 var defaultOptions = {
     errorPrefix: 'error',
@@ -172,6 +175,7 @@ var WRP = (function () {
         }
         var result = this.runLoaders.apply(this, loaders);
         this.slots = this._data.slots;
+        this.sentences = this._data.sentences;
         this.marksIndex = this._data.indexObj;
         this.renderData = this.genRenderData(result);
     }
@@ -180,6 +184,9 @@ var WRP = (function () {
     };
     WRP.prototype.getRenderData = function () {
         return this.renderData;
+    };
+    WRP.prototype.getSentences = function () {
+        return this.sentences;
     };
     WRP.prototype.genRenderData = function (marks) {
         for (var i = 0; i < marks.length; i++) {
@@ -383,6 +390,38 @@ exports.default = preRender;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+function markInSentence() {
+    var marks = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        marks[_i] = arguments[_i];
+    }
+    var sentences = this.reportJSON.reportBySentence;
+    this._data.sentences = sentences;
+    for (var _a = 0, marks_1 = marks; _a < marks_1.length; _a++) {
+        var mark = marks_1[_a];
+        mark.sentIndex = 0;
+        for (var i = 0; i < sentences.length; i++) {
+            var current = sentences[i].beginPosition;
+            var next = sentences[i + 1] && sentences[i + 1].beginPosition;
+            if (mark.start >= current) {
+                if (mark.end <= next || !next) {
+                    mark.sentIndex = i;
+                }
+            }
+        }
+    }
+    return marks;
+}
+exports.default = markInSentence;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 function processCompress() {
     var marks = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -402,7 +441,7 @@ exports.default = processCompress;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -441,7 +480,7 @@ exports.default = processCover;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -492,7 +531,7 @@ exports.default = slotGen;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
