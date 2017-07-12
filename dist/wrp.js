@@ -395,19 +395,26 @@ function markInSentence() {
     for (var _i = 0; _i < arguments.length; _i++) {
         marks[_i] = arguments[_i];
     }
-    var sentences = this.reportJSON.reportBySentence;
+    var sentences = this.reportJSON.reportBySentence || [];
     this._data.sentences = sentences;
-    for (var _a = 0, marks_1 = marks; _a < marks_1.length; _a++) {
-        var mark = marks_1[_a];
-        mark.sentIndex = 0;
-        for (var i = 0; i < sentences.length; i++) {
-            var current = sentences[i].beginPosition;
-            var next = sentences[i + 1] && sentences[i + 1].beginPosition;
-            if (mark.start >= current) {
-                if (mark.end <= next || !next) {
-                    mark.sentIndex = i;
+    if (sentences.length !== 0) {
+        try {
+            for (var _a = 0, marks_1 = marks; _a < marks_1.length; _a++) {
+                var mark = marks_1[_a];
+                mark.sentIndex = 0;
+                for (var i = 0; i < sentences.length; i++) {
+                    var current = sentences[i].beginPosition;
+                    var next = sentences[i + 1] && sentences[i + 1].beginPosition;
+                    if (mark.start >= current) {
+                        if (mark.end <= next || !next) {
+                            mark.sentIndex = i;
+                        }
+                    }
                 }
             }
+        }
+        catch (error) {
+            console.log(error);
         }
     }
     return marks;
